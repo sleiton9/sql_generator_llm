@@ -1,4 +1,4 @@
-# Titulo de la Solución: Prueba de concepto X vvvvv Leiton
+# Titulo de la Solución: Prueba de concepto X:
 >Este documento presenta la decripción de la solución, la arquitectura y las principales consideraciones y pasos requeridos para realizar el despliegue e instalación del X.
 
 Tambien, en el siguientes links se encuentran la informacion documental asociada al proyecto:

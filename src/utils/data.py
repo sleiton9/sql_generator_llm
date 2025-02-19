@@ -1,8 +1,7 @@
+# Desc: Utility functions for reading and querying data.
 import pandas as pd
 import pandasql as ps
 import logging
-
-from config.config_yaml_loader import load_config
 
 # Configure logger for this module
 logger = logging.getLogger(__name__)
@@ -26,7 +25,6 @@ def read_data(path: str) -> pd.DataFrame:
     except Exception as e:
         logger.error(f"Error reading data from {path}: {e}")
         raise
-
 
 def query_data(df: pd.DataFrame, query: str) -> pd.DataFrame:
     """

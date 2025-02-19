@@ -1,3 +1,5 @@
+# Desc: Load configuration from the config.yaml file and add dynamic paths based on the project folder structure.
+# Returns: A dictionary containing the configuration data and additional path settings.
 import os
 import yaml
 from typing import Any, Dict

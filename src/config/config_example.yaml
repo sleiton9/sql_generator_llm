@@ -1,8 +1,11 @@
----
-    # General config values
-  llm_model: gemini
+# This is an example of the config file that you should create in the path src/config/config.yaml
+# You can copy this file and paste it in the path src/config/config.yaml
+# Then you can modify the values to your needs
 
-  # Config Values Gemini
-  gemini_api_key: API_KEY
-  gemini_model: gemini-2.0-flash
-  gemini_default_context: Eres un pirata
+# General config values
+llm_model: gemini
+
+# Config Values Gemini
+gemini_api_key: API_KEY
+gemini_model: gemini-2.0-flash
+gemini_default_context: Eres un pirata

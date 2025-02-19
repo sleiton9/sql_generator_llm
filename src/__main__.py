@@ -22,9 +22,11 @@ def main() -> None:
 
         test_prompt = "Tengo dos perros en mi casa"
         response = send_prompt(test_prompt)
+        print(response)
 
         test_prompt = "Cuentos perros tengo en mi casa?"
         response = send_prompt(test_prompt)
+        print(response)
 
         df = read_data(PATH_RAW_DATA)
 

@@ -1,6 +1,9 @@
+# Desc: Configure logging to output logs to a file with rotation
+# and add the setup_logging function to the __main__.py script.
 import logging
 from logging.handlers import RotatingFileHandler
 import os
+
 
 def setup_logging() -> None:
     """
