@@ -1,5 +1,4 @@
 import logging
-from typing import Any
 from config.config_yaml_loader import load_config
 
 from google import genai
@@ -15,11 +14,10 @@ LLM_MODEL = config.get("llm_model", "gemini").lower().strip()
 GEMINI_API_KEY = config.get("gemini_api_key")
 GEMINI_MODEL = config.get("gemini_model")
 GEMINI_DEFAULT_CONTEXT = config.get("gemini_default_context")
-# Global variable to store the initialized Gemini chat object.
-global_gemini_chat = None
+global_gemini_chat = None   # Global variable to store the initialized Gemini chat object.
 
 
-def initialize_gemini() -> Any:
+def initialize_gemini() -> genai.chats.Chat:
     """
     Initialize and return the Gemini chat object.
 
@@ -27,7 +25,7 @@ def initialize_gemini() -> Any:
     If it has already been initialized, the existing instance is returned.
 
     Returns:
-        Any: The initialized Gemini chat object.
+        genai.chats.Chat: The initialized Gemini chat object.
     """
     global global_gemini_chat
     if global_gemini_chat is None:
@@ -74,5 +72,7 @@ def send_prompt(prompt: str) -> str:
     """
     if LLM_MODEL == "gemini":
         return chat_gemini(prompt)
+    elif LLM_MODEL == "chatgpt":
+        pass #TODO Add connection and chat for chat GPT
     else:
         raise ValueError(f"LLM model '{LLM_MODEL}' is not supported")
