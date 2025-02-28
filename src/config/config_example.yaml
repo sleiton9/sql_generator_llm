@@ -4,6 +4,8 @@
 
 # General config values
 llm_model: gemini
+sql_motor: pandasql
+table_name: df
 
 # Config Values Gemini
 gemini_api_key: API_KEY

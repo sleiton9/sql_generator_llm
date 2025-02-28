@@ -1,6 +1,8 @@
 # Desc: This file contains the code to interact with the LLM models and send prompts to it.
 import logging
 from config.config_yaml_loader import load_config
+import json
+import re
 
 from google import genai
 from google.genai import types
@@ -77,3 +79,37 @@ def send_prompt(prompt: str) -> str:
         pass #TODO Add connection and chat for chat GPT
     else:
         raise ValueError(f"LLM model '{LLM_MODEL}' is not supported")
+
+def extract_json_from_code_block(response_text: str) -> str | None:
+    """
+    Finds a ```json ... ``` code block in the response_text and returns the raw JSON inside it.
+    Returns None if not found.
+    """
+    pattern = r"```json\s*(.*?)\s*```"  # Captura el contenido entre ```json y ```
+    match = re.search(pattern, response_text, re.DOTALL | re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+    return None
+
+def get_sql_and_explanation(response_text: str) -> tuple[str | None, str | None]:
+    """
+    Tries to extract JSON from triple backticks, then parse it. Expects 'sql_statement' and 'explanation'.
+    
+    Args:
+        response_text (str): The text response from the model.
+    
+    Returns:
+        tuple[str | None, str | None]: A tuple containing the SQL statement and explanation strings
+        extracted from the JSON, or None if not found.
+    """
+    json_content = extract_json_from_code_block(response_text)
+    if not json_content:
+        return None, None
+
+    try:
+        data = json.loads(json_content)
+        sql_statement = data.get("sql_statement")
+        explanation = data.get("explanation")
+        return sql_statement, explanation
+    except json.JSONDecodeError:
+        return None, None

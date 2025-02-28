@@ -32,6 +32,9 @@ def load_config() -> Dict[str, Any]:
         "raw_data": os.path.join(
             project_root, "data", "raw", "data_micaja_ofuscada_20250214.csv"
         ),
+        "raw_data_definition": os.path.join(
+            project_root, "data", "raw", "Definicion de campos_20250214.csv"
+        ),
         # Additional paths can be added here
     }
 
