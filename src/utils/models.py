@@ -13,10 +13,6 @@ logger = logging.getLogger(__name__)
 config = load_config()
 LLM_MODEL = config.get("llm_model", "gemini").lower().strip()
 
-# Gemini config values
-GEMINI_API_KEY = config.get("gemini_api_key")
-GEMINI_MODEL = config.get("gemini_model")
-GEMINI_DEFAULT_CONTEXT = config.get("gemini_default_context")
 global_gemini_chat = None   # Global variable to store the initialized Gemini chat object.
 
 
@@ -32,11 +28,30 @@ def initialize_gemini() -> genai.chats.Chat:
     """
     global global_gemini_chat
     if global_gemini_chat is None:
+        # Gemini config values
+        GEMINI_API_KEY = config.get("gemini_api_key")
+        GEMINI_MODEL = config.get("gemini_model")
+        GEMINI_DEFAULT_CONTEXT = config.get("gemini_default_context")
+        GEMINI_TEMPERATURE = config.get("gemini_temperature", 0.5)
+        GEMINI_TOP_P = config.get("gemini_top_p", 0.5)
+        GEMINI_MAX_OUTPUT_TOKENS = config.get("gemini_max_output_tokens", 1024)
+        GEMINI_TOP_K = config.get("gemini_top_k", 50)
+        
         logger.info("Initialize Gemini")
         client_gemini = genai.Client(api_key=GEMINI_API_KEY)
+
+
+        generation_config = types.GenerateContentConfig(
+            system_instruction=GEMINI_DEFAULT_CONTEXT,
+            temperature=GEMINI_TEMPERATURE,
+            top_p=GEMINI_TOP_P,
+            max_output_tokens=GEMINI_MAX_OUTPUT_TOKENS,
+            top_k=GEMINI_TOP_K
+        )
+
         global_gemini_chat = client_gemini.chats.create(
             model=GEMINI_MODEL,
-            config=types.GenerateContentConfig(system_instruction=GEMINI_DEFAULT_CONTEXT)
+            config=generation_config
         )
     return global_gemini_chat
 

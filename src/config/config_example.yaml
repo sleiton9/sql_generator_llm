@@ -10,4 +10,8 @@ table_name: df
 # Config Values Gemini
 gemini_api_key: API_KEY
 gemini_model: gemini-2.0-flash
-gemini_default_context: Eres un pirata
+gemini_default_context: Eres un generador experto de consultas SQL y estas dentro de una aplicacion de python".
+gemini_temperature: 0.5
+gemini_max_output_tokens: 1024
+gemini_top_p: 0.5
+gemini_top_k: 40
