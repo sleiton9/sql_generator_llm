@@ -20,14 +20,17 @@ def setup_logging() -> None:
     rotating_handler = RotatingFileHandler(
         path_logs_save, maxBytes=1024 * 1024, backupCount=5, encoding='utf-8'
     )
+    rotating_handler.setLevel(logging.INFO)
     rotating_handler.setFormatter(formatter)
+
+    # Handler for the console
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.WARNING)
+    console_handler.setFormatter(formatter)
 
     # Configure basic logging to include both the rotating file handler and a console handler.
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.DEBUG,
         format=log_format,
-        handlers=[
-            rotating_handler,
-            logging.StreamHandler()
-        ]
+        handlers=[rotating_handler, console_handler]
     )

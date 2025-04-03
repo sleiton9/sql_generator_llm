@@ -1,0 +1,29 @@
+Nombre_del campo;Tipo_campo;Definicion
+COD_CLIENTE;object;Codigo identificador del establecimiento
+DES_CLIENTE;object;descripcion del establecimiento
+DES_CIUDAD;object;Ciudad en donde se encuentra ubicado el establecimiento
+DES_TIPOCLIENTE;object;Tipo de establecimiento
+COD_TICKET;object;Codigo de la transaccion
+ANIO;int64;Año en que se ejecuto la transaccion
+MES;int64;Mes en que se ejecuto la transaccion
+FECHA;object;Fecha en que se ejecuto la transaccion
+FECHA_EXACTA;object;Fecha exacta en que se ejecuto la transaccion
+HORA;int64;Hora en que se ejecuto la transaccion
+COD_MATERIALEAN;object;Codigo del material que se vendio detro de la transaccion
+DES_MATERIAL;object;Descipcion del material
+DES_CANASTA;object;Canasta de productos a la que pertenece el material
+DES_TIPOCANASTA;object;Tipologia de la canasta a la que pertenece el material
+DES_SECTOR;object;Sector de productos al que pertenece el material
+DES_CATEGORIA;object;Categoria de productos a la que pertenece el material
+DES_SUBCATEGORIA;object;Subcategoria de productos al que pertenece el material
+DES_LINEA;object;Linea de productos a la que pertenece el material
+DES_MARCA;object;Marca del material
+DES_SUBMARCA;object;Submarca del material
+DES_FABRICANTE;object;Fabricante que produce el material
+DES_TIPOFABRICANTE;object;Tipo de fabricante (Nutresa o no Nutresa)
+LONGITUD_METROS;float64;Longitud en metros del material
+PESO;float64;Peso del material
+DES_UNIDADMEDIDA;object;Unidad de medida del peso del material
+PRECIO_VENTA;float64;Precio de venta del material
+VENTA_VALOR;float64;Ventas en valor del material en la transaccion
+VENTA_VOLUMEN;float64;Venta en volumen (unidades de producto) del material en la transaccion
