@@ -48,13 +48,13 @@ Esta solución implementa un sistema inteligente que convierte preguntas en leng
 - **Escalabilidad**: Capacidad de manejar múltiples consultas simultáneas
 
 ### Screenshots / Demo
-![screenshot](images\funcionamiento.png)
+![screenshot](images/funcionamiento.png)
 
 ## Arquitectura lógica de la solución
 
 El sistema implementa una arquitectura modular que integra modelos de lenguaje natural con procesamiento de datos estructurados:
 
-![](images\flujo_datos.png)
+![](images/flujo_datos.png)
 
 **Componentes principales:**
 1. **Interfaz de Usuario**: Recibe consultas en lenguaje natural
@@ -73,6 +73,9 @@ El sistema implementa una arquitectura modular que integra modelos de lenguaje n
 ├── .gitignore
 ├── docker-compose.yml
 ├── Dockerfile
+├── images/
+│   ├── funcionamiento.png
+│   └── flujo_datos.png
 ├── data/
 │   ├── raw/
 |   |   ├── Consultas Nutresa.xlsx
