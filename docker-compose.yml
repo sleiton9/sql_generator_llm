@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  sql-llm:
+    build: .
+    container_name: sql-llm
+    volumes:
+      - ./data:/app/data
+      - ./src/config:/app/src/config
+      - ./src/logs:/app/src/logs
+    stdin_open: true
+    tty: true
+    restart: unless-stopped

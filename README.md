@@ -1,151 +1,276 @@
-# Titulo de la Solución: Prueba de concepto X:
->Este documento presenta la decripción de la solución, la arquitectura y las principales consideraciones y pasos requeridos para realizar el despliegue e instalación del X.
+# Generador de SQL con Modelos de Lenguaje Natural
+>Este documento presenta la descripción de la solución, la arquitectura y las principales consideraciones y pasos requeridos para realizar el despliegue e instalación del sistema de generación automática de consultas SQL a partir de preguntas en lenguaje natural.
 
-Tambien, en el siguientes links se encuentran la informacion documental asociada al proyecto:
+También, en los siguientes enlaces se encuentra la información documental asociada al proyecto:
 
-[Carpeta Asociada asociada a Protocolo de Informacion de Equipo](**Se debe habilitar enlace de OneDrive en donde tenga la informacion**)
+[Carpeta Asociada a Protocolo de Información de Equipo](**Se debe habilitar enlace de OneDrive en donde tenga la información**)
 
-[Informe Proyecto](**Se debe habilitar enlace en donde tenga la informacion**)
+[Informe Proyecto](**Se debe habilitar enlace en donde tenga la información**)
 
-[Manual de Usuario](**Se debe habilitar enlace en donde tenga la informacion**)
+[Manual de Usuario](**Se debe habilitar enlace en donde tenga la información**)
 
-[Video Demo](**Se debe habilitar enlace en donde esta el demo establecido*)
+[Video Demo](**Se debe habilitar enlace en donde está el demo establecido**)
 
 [Hacer copia y llenar plantilla de Comunicaciones](https://docs.google.com/document/d/1Lc-vkdru-VcBhAuCe9aKOgc99HhGIM9m/edit#heading=h.30j0zll)
 
 ## Tabla de Contenidos
 * [Descripción de la solución](#descripción-de-la-solución)
 * [Screenshots](#screenshots)
+* [Arquitectura lógica de la solución](#arquitectura-lógica-de-la-solución)
+* [Estructura del proyecto](#estructura-del-proyecto)
 * [Requerimientos](#requerimientos)
-* [Instalacion](#instalación)
-* [Ejemplos de Codigo](#ejemplos-de-codigo)
+* [Instalación](#instalación)
+* [Configuración](#configuración)
+* [Ejemplos de Uso](#ejemplos-de-uso)
 * [Pruebas Automatizadas](#pruebas-automatizadas)
 * [Autores](#autores)
 
 ## Descripción de la solución
-**Nota:** Obligatorio: Minimo debe tener una descripcion de la solucion con los objetivos establecidos con el negocio y los entregables esperados.
 
 ### Reto del cliente
-**Nota:** Puede poner cual es el reto que el cliente tiene y se quiere resolver con analitica
-### Solución Alianza CAOBA
-**Nota:** Puede poner la solucion propuesta desde el equipo
-### Impacto potencial esperado en el Negocio
-**Nota:** Puede poner el impacto que espera el negocio
+Las organizaciones enfrentan el desafío de permitir que usuarios no técnicos accedan a información almacenada en bases de datos mediante consultas complejas. Los analistas de negocio necesitan obtener insights de datos sin conocer SQL, lo que tradicionalmente requiere soporte técnico especializado y genera dependencias que ralentizan la toma de decisiones.
 
-**Ejemplos: Como debe estar la descripción de la solución**
-![](structure_example/docs/readme/ejemplo_descripcion_proyecto.png)
+### Solución Alianza CAOBA
+Esta solución implementa un sistema inteligente que convierte preguntas en lenguaje natural a consultas SQL optimizadas utilizando modelos de lenguaje de gran escala (LLM). El sistema soporta múltiples estrategias de generación de prompts (zero-shot, few-shot, y RAG) y es compatible con diferentes modelos como Gemini y ChatGPT.
+
+**Características principales:**
+- Generación automática de consultas SQL desde preguntas en español
+- Soporte para múltiples motores SQL (pandas, ANSI)
+- Implementación de RAG (Retrieval-Augmented Generation) para contexto mejorado
+- Sistema de logging y monitoreo integrado
+- Métricas de evaluación automática de la calidad de las consultas generadas
+
+### Impacto potencial esperado en el Negocio
+- **Democratización del acceso a datos**: Usuarios no técnicos pueden consultar información sin conocer SQL
+- **Reducción de tiempos de respuesta**: Eliminación de cuellos de botella técnicos para consultas ad-hoc
+- **Mejora en la toma de decisiones**: Acceso más rápido a insights basados en datos
+- **Optimización de recursos**: Reducción de la carga de trabajo del equipo técnico
+- **Escalabilidad**: Capacidad de manejar múltiples consultas simultáneas
 
 ### Screenshots / Demo
-**Nota:** Obligatorio: Debe poner una imagen, .gif o otros de la solucion entregada desplegada para el negocio
 ![screenshot](https://www.eclipsemediasolutions.com/sites/default/files/Audience-web-traffic-fluctuations1.jpg)
 
-## Arquitectura logica de la solución
-**Nota:** Obligatorio: Minimo debe haber una descripcion y una imagen con un diagrama que represente la organizacion de los procesos que se realizaron en la solucion
+## Arquitectura lógica de la solución
 
-**Ejemplo: Se espera un diagrama como la siguiente figura:** 
+El sistema implementa una arquitectura modular que integra modelos de lenguaje natural con procesamiento de datos estructurados:
+
 ![](structure_example/docs/readme/docs_Arquitectura.png)
 
-
+**Componentes principales:**
+1. **Interfaz de Usuario**: Recibe consultas en lenguaje natural
+2. **Motor de Procesamiento de Prompts**: Genera prompts optimizados según la estrategia seleccionada
+3. **Integración LLM**: Conecta con Gemini o ChatGPT para generar SQL
+4. **Motor de Ejecución SQL**: Ejecuta consultas contra los datos usando pandas/SQL
+5. **Sistema RAG**: Proporciona contexto relevante basado en embeddings
+6. **Módulo de Evaluación**: Valida y mide la calidad de las consultas generadas
 
 ## Estructura del proyecto
-
-**Ejemplo: Forma de poner estructura en Markdown**
-
--- Se recomiendo uso del comanddo y su uso dependera de su Sistema Operativo:
-[tree](https://www.geeksforgeeks.org/tree-command-unixlinux/) 
 
 ```
 .
 ├── README.md
+├── requirements.txt
+├── .gitignore
+├── docker-compose.yml
+├── Dockerfile
 ├── data/
-│   ├── raw/
-│   │   ├── data.txt
-│   │   └── data_ignorar.txt
-│   └── stage/
-│       └── todo.txt
-│   ├── analytics/
-│   │   └── todo.txt
-├── datalab/
-│   └── todo.txt
+│   ├── raw/
+|   |   ├── Consultas Nutresa.xlsx
+│   │   ├── data_micaja_ofuscada_20250214.csv
+│   │   └── Definicion de campos_20250214.csv
+│   ├── stage/
+│   │   ├── rag_db_context.json
+│   │   └── consultas_nutresa_resueltas.csv
+│   └── analytics/
+│       ├── Hugging_Face/
+│       └── Nutresa/
 ├── src/
-│   └── todo.txt
+│   ├── __main__.py
+│   ├── config/
+│   │   ├── config_yaml_loader.py
+│   │   └── config_example.yaml
+│   ├── utils/
+│   │   ├── data.py
+│   │   └── models.py
+│   ├── logs/
+│   │   └── config_logging.py
+│   └── test/
+│       ├── test_hugging_face.py
+│       ├── test_nutresa.py
+│       ├── test_rag.py
+│       ├── metricas_hugging_face.py
+│       ├── metricas_nutresa.py
+│       └── run_sql_nutresa.py
 ├── conf/
-│   └── todo.txt
-├── docs/
-│   └── readme/
-│       ├── docs_Arquitectura.png
-│       ├── docs_modeloDatosPowerBI.png
-│       ├── ejemplo_descripcion_proyecto.png
-│       └── ejemplo_estructura_proyecto.png
 ├── dashboard/
-│   └── todo.txt
+├── datalab/
 ├── deploy/
-│   └── todo.txt
 └── temp/
-    ├── 00Standard_Ref_to_make_Experiments.ipynb
-    └── root.py
 ```
 
-**Ejemplo:Se espera un diagrama como la siguiente figura: ** 
-![](structure_example/docs/readme/ejemplo_estructura_proyecto.png)
-
-
-
-## Proceso de ejecucion y despliegue
 
 ## Requerimientos
-**Nota:** Obligatorio: Minimo debe escribir los requerimientos por cada lenguaje de programacion usado tanto en el back-end (Ej: Python, R) como en el front-end, si aplica. Tambien, es importante que ponga las versiones correspondientes 
-### Librerias Empleadas 
-Para llenar
+
+### Librerías Empleadas 
+- **google-genai**: Integración con modelos Gemini de Google
+- **openai**: Integración con modelos ChatGPT
+- **pandas**: Manipulación y análisis de datos
+- **pandasql**: Ejecución de consultas SQL en DataFrames
+- **pyyaml**: Configuración mediante archivos YAML
+- **networkx**: Análisis de estructuras de consultas SQL
+- **sqlfluff**: Validación y formateo de consultas SQL
+- **huggingface_hub**: Acceso a datasets de evaluación
+
 ### Requerimientos Hardware
-Para llenar
+- **Memoria RAM**: Mínimo 8GB, recomendado 16GB
+- **Procesador**: CPU multi-core (4+ cores recomendado)
+- **Almacenamiento**: 2GB de espacio libre mínimo
+- **Conectividad**: Acceso a internet para APIs de LLM
+
 ### Requerimientos Software
-Para llenar
+- **Python**: 3.8 o superior
+- **Sistema Operativo**: Windows 10+, macOS 10.14+, o Linux Ubuntu 18.04+
+- **APIs requeridas**: 
+  - Google Gemini API Key
+  - OpenAI API Key (opcional)
 
-## Instalación: 
-**Nota:** Obligatorio: Minimo debe haber en el proyecto el archivo que permita instalar el ambiente necesario para el despliegue de la solución y los comandos ejecutados para la instalacion. Por ejemplo, si es Python un requeriments.txt o un archivo de DESCRIPTION en R. 
+## Instalación
 
-## Configuracion
-**Nota:** Para llenar
+1. **Clonar el repositorio**:
+```bash
+git clone <repository-url>
+cd <project-directory>
+```
 
-## Ejemplos de Codigo
-**Nota:** Para llenar
+2. **Crear ambiente virtual**:
+```bash
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
+```
 
-## Errores conocidos
-**Nota:** Para llenar
+3. **Instalar dependencias**:
+```bash
+pip install -r requirements.txt
+```
+
+4. **Configurar variables de entorno**:
+Copiar `src/config/config_example.yaml` como `src/config/config.yaml` y completar las API keys.
+
+## Configuración
+
+### Archivo de Configuración
+Crear `src/config/config.yaml` basado en el ejemplo proporcionado:
+
+```yaml
+# Configuración general
+llm_model: gemini  # gemini, chatgpt
+prompt_method: few_shot  # zero_shot, few_shot, rag
+
+# Configuración Gemini
+gemini_api_key: YOUR_API_KEY
+gemini_model: gemini-2.0-flash
+
+# Configuración SQL
+sql_motor: ansi
+table_name: df
+
+# Parámetros del modelo
+temperature: 0.1
+max_output_tokens: 512
+top_p: 0.2
+```
+
+### Datos de Entrada
+- Colocar archivo de datos en `data/raw/`
+- Colocar definición de campos en `data/raw/`
+- Para RAG, configurar `data/stage/rag_db_context.json`
+
+## Ejemplos de Uso
+
+### Uso Básico - Interfaz Interactiva
+```bash
+python src/__main__.py
+```
+
+### Ejemplos de Consultas
+- "¿Cuál es el cliente que más vendió en agosto de 2024?"
+- "¿Cuál es el top 5 de ciudades con mayor valor de ventas?"
+- "¿Cuántas ventas se realizaron por mes en 2024?"
+
+### Uso Programático
+```python
+from utils.models import send_prompt, get_sql_and_explanation
+from utils.data import read_data_and_definition, query_data
+
+# Cargar datos
+df, context = read_data_and_definition(path_data, path_definition)
+
+# Generar consulta
+response = send_prompt("¿Cuántos registros hay en total?")
+sql, explanation = get_sql_and_explanation(response)
+
+# Ejecutar consulta
+result = query_data(df, sql)
+print(result)
+```
 
 ## Pruebas Automatizadas
-**Nota:** Si aplica puede poner como correr las pruebas
 
-## Imagenes
-**Nota:** Si aplica puede poner cuales fueron las imagenes usadas (Ejemplo: Docker)
+### Evaluación con Dataset Hugging Face
+```bash
+python src/test/test_hugging_face.py
+python src/test/metricas_hugging_face.py
+```
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### Evaluación con Dataset Nutresa
+```bash
+python src/test/test_nutresa.py
+python src/test/metricas_nutresa.py
+```
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Pruebas RAG
+```bash
+python src/test/test_rag.py
+```
+
+### Métricas Implementadas
+- **Exact Match**: Coincidencia exacta de resultados
+- **Structural Match**: Coincidencia estructural de consultas
+- **Value Accuracy**: Precisión en valores numéricos
+- **ETM (Execution Tree Matching)**: Similitud en estructura de ejecución
+
+## Errores conocidos
+
+- **Rate Limiting**: Las APIs pueden limitar el número de consultas por minuto
+- **Contexto Limitado**: Consultas muy complejas pueden exceder el límite de tokens
+- **Precisión de Fechas**: Algunos formatos de fecha pueden requerir configuración adicional
+- **Caracteres Especiales**: Algunos caracteres en nombres de columnas pueden causar errores
 
 ## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- Implementación de base de datos vectorial
+- Soporte para bases de datos relacionales directas
+- Interfaz web para usuarios finales
+- Métricas de rendimiento en tiempo real
 
 ## Autores
-**Nota:** Obligatorio: Minimo debe llenar los autores tanto de analitica como del negocio,su organizacion, su nombre con el nombre del papel que tomo en el equipo, su respectivo correo electronico
 
-| Organización   | Nombre del Miembro | Correo electronico | 
-|----------|-------------|-------------|
-| PUJ-Bogota |  Persona 1: Cientific@ de Datos | ejemplo@XXXX |
-| Organizacion  |  Persona 2:Lider del negocio  | ejemplo@XXXX |
+| Organización   | Nombre del Miembro | Rol | Correo electrónico | 
+|----------|-------------|-------------|-------------|
+| PUJ-Bogotá |  Sebastián Garzón Leitón: Estudiante maestría en analítica para la inteligencia de negocios | Desarrollo | sebastian_garzon@javeriana.edu.co |
+| PUJ-Bogotá |  Laura Mariana Cubillos Toro: Estudiante maestría en analítica para la inteligencia de negocios | Desarrollo | cubillost_laura@javeriana.edu.co |
+| PUJ-Bogotá |  Jonathan Claros Barbosa: Estudiante maestría en analítica para la inteligencia de negocios | Desarrollo | jonathan.claros@javeriana.edu.co |
+| PUJ-Bogotá |  Hugo Alejandro Hernandez Rozo: Estudiante maestría en analítica para la inteligencia de negocios | Desarrollo | hugoa.hernandez@javeriana.edu.co |
+| PUJ-Bogotá  |  Juan Pablo Pajaro Hernandez: Director trabajo de grado  | Director | juanpajaro@javeriana.edu.co |
+| PUJ-Bogotá  |  Katherine Cabrera Rodriguez: Directora trabajo de grado  | Directora | katherine.cabrera@javeriana.edu.co |
+
+## License
+
+Este proyecto está bajo licencia [especificar licencia]. Ver el archivo LICENSE para más detalles.
+
+## Support
+
+Para soporte técnico o consultas sobre el proyecto:
+- Crear un issue en el repositorio
+- Contactar al equipo de desarrollo
+- Revisar la documentación en [enlace a documentación]
