@@ -12,8 +12,7 @@
 9. [Personalización de Prompts](#personalización-de-prompts)
 10. [Preparación de Datos](#preparación-de-datos)
 11. [Uso de la Aplicación](#uso-de-la-aplicación)
-12. [Ejemplos Prácticos](#ejemplos-prácticos)
-13. [Solución de Problemas](#solución-de-problemas)
+12. [Solución de Problemas](#solución-de-problemas)
 
 ---
 
