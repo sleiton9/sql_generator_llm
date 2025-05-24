@@ -48,13 +48,13 @@ Esta solución implementa un sistema inteligente que convierte preguntas en leng
 - **Escalabilidad**: Capacidad de manejar múltiples consultas simultáneas
 
 ### Screenshots / Demo
-![screenshot](https://www.eclipsemediasolutions.com/sites/default/files/Audience-web-traffic-fluctuations1.jpg)
+![screenshot](images\funcionamiento.png)
 
 ## Arquitectura lógica de la solución
 
 El sistema implementa una arquitectura modular que integra modelos de lenguaje natural con procesamiento de datos estructurados:
 
-![](structure_example/docs/readme/docs_Arquitectura.png)
+![](images\flujo_datos.png)
 
 **Componentes principales:**
 1. **Interfaz de Usuario**: Recibe consultas en lenguaje natural
