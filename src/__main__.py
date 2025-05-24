@@ -43,7 +43,7 @@ def main() -> None:
             vector_store = initialize_gemini_rag()
 
         while True:
-            user_question = input("¿Cuál es tu duda frente a los datos? ")
+            user_question = input("¿Cuál es tu duda frente a los datos? \n")
             if user_question.lower().lstrip() == "exit":
                 logger.info("----------------------------End main function--------------------------------------")
                 break
