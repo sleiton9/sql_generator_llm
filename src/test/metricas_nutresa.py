@@ -1,13 +1,16 @@
 import networkx as nx
 import pandas as pd
-from sqlfluff.core import Linter, SQLParseError
 import os
-from config.config_yaml_loader import load_config
+import sys
 import json
 import pandas as pd
-import numpy as np
-from typing import List, Dict, Any, Tuple
-import ast
+from typing import List, Dict, Any
+from pathlib import Path
+src_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(src_dir))
+
+from config.config_yaml_loader import load_config
+
 
 config = load_config()
 

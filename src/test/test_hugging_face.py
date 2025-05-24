@@ -1,10 +1,15 @@
+import pandas as pd
+import time
+import os
+import sys
+from pathlib import Path
+src_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(src_dir))
+
 import logging
 from logs.config_logging import setup_logging
 from config.config_yaml_loader import load_config
 from utils.models import send_unique_prompt_gemini, get_sql_and_explanation, generate_prompt_for_test_hugging_face, send_unique_prompt_chatgpt
-import pandas as pd
-import time
-import os
 
 # Setup the logs
 setup_logging()

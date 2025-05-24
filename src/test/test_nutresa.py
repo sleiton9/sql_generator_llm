@@ -1,12 +1,17 @@
+import pandas as pd
+import time
+import pandasql as ps
+import os
+import sys
+from pathlib import Path
+src_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(src_dir))
+
 import logging
 from logs.config_logging import setup_logging
 from config.config_yaml_loader import load_config
 from utils.models import send_unique_prompt_gemini, get_sql_and_explanation, generate_prompt_for_test_nutresa, send_unique_prompt_chatgpt, initialize_gemini_rag, get_relevant_context_gemini
 from utils.data import read_data_and_definition
-import pandas as pd
-import time
-import pandasql as ps
-import os
 
 # Setup the logs
 setup_logging()

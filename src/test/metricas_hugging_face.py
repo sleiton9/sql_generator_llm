@@ -1,6 +1,12 @@
 import networkx as nx
 import pandas as pd
 import os
+import sys
+from pathlib import Path
+src_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(src_dir))
+
+
 from config.config_yaml_loader import load_config
 
 config = load_config()
