@@ -333,6 +333,21 @@ prompt_few_shot: |
 # Para esta pregunta ¿Cuál es el top 5 de vendedores por comisiones? El resultado esperado es: SELECT VENDEDOR, SUM(COMISION) as TOTAL_COMISION FROM df GROUP BY VENDEDOR ORDER BY TOTAL_COMISION DESC LIMIT 5;
 ```
 
+### Configuración para Empresa de Servicios:
+
+```yaml
+## EJEMPLOS ###
+# REGLAS DE NEGOCIO - SERVICIOS:
+# - "Clientes activos": con transacciones en los últimos 3 meses
+# - "Servicios rentables": margen superior al 30%
+# - "Peak hours": entre 9:00 y 17:00
+# - "Retención alta": clientes con más de 2 años de antigüedad
+
+# Para esta pregunta ¿Cuántos clientes activos tenemos? El resultado esperado es: SELECT COUNT(DISTINCT CLIENTE) as CLIENTES_ACTIVOS FROM df WHERE FECHA >= DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH);
+
+# Para esta pregunta ¿Cuáles servicios son más rentables? El resultado esperado es: SELECT SERVICIO, AVG(MARGEN) as MARGEN_PROMEDIO FROM df GROUP BY SERVICIO HAVING AVG(MARGEN) > 0.30 ORDER BY MARGEN_PROMEDIO DESC;
+```
+
 ---
 
 ## Configuración de Modelos LLM
@@ -514,42 +529,6 @@ incluyendo el código del cliente y el total de ventas realizadas.
 Resultado de la pregunta:
    CODIGO_CLIENTE  TOTAL_VENTAS
 0           12345        1500000
-```
-
----
-
-## Ejemplos Prácticos
-
-### Configuración para Empresa de Retail:
-
-```yaml
-## EJEMPLOS ###
-# REGLAS DE NEGOCIO - RETAIL:
-# - "Productos de alta rotación": más de 100 unidades vendidas por mes
-# - "Clientes premium": compras superiores a $1,000,000 anuales
-# - "Temporada alta": meses de noviembre y diciembre
-# - "Margen saludable": superior al 25%
-
-# Para esta pregunta ¿Cuáles son los productos de alta rotación este mes? El resultado esperado es: SELECT PRODUCTO, SUM(CANTIDAD) as UNIDADES_VENDIDAS FROM df WHERE EXTRACT(MONTH FROM FECHA) = EXTRACT(MONTH FROM CURRENT_DATE) GROUP BY PRODUCTO HAVING SUM(CANTIDAD) > 100 ORDER BY UNIDADES_VENDIDAS DESC;
-
-# Para esta pregunta ¿Quiénes son nuestros clientes premium? El resultado esperado es: SELECT CLIENTE, SUM(TOTAL_COMPRA) as COMPRAS_ANUALES FROM df WHERE ANIO = 2024 GROUP BY CLIENTE HAVING SUM(TOTAL_COMPRA) > 1000000 ORDER BY COMPRAS_ANUALES DESC;
-
-# Para este pregunta ¿Cómo fue el desempeño en temporada alta? El resultado esperado es: SELECT MES, SUM(VENTAS) as TOTAL_VENTAS FROM df WHERE MES IN ('Noviembre', 'Diciembre') AND ANIO = 2024 GROUP BY MES;
-```
-
-### Configuración para Empresa de Servicios:
-
-```yaml
-## EJEMPLOS ###
-# REGLAS DE NEGOCIO - SERVICIOS:
-# - "Clientes activos": con transacciones en los últimos 3 meses
-# - "Servicios rentables": margen superior al 30%
-# - "Peak hours": entre 9:00 y 17:00
-# - "Retención alta": clientes con más de 2 años de antigüedad
-
-# Para esta pregunta ¿Cuántos clientes activos tenemos? El resultado esperado es: SELECT COUNT(DISTINCT CLIENTE) as CLIENTES_ACTIVOS FROM df WHERE FECHA >= DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH);
-
-# Para esta pregunta ¿Cuáles servicios son más rentables? El resultado esperado es: SELECT SERVICIO, AVG(MARGEN) as MARGEN_PROMEDIO FROM df GROUP BY SERVICIO HAVING AVG(MARGEN) > 0.30 ORDER BY MARGEN_PROMEDIO DESC;
 ```
 
 ---
