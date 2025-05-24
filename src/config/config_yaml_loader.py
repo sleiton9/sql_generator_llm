@@ -35,6 +35,9 @@ def load_config() -> Dict[str, Any]:
         "raw_data_definition": os.path.join(
             project_root, "data", "raw", "Definicion de campos_20250214.csv"
         ),
+        "rag_db_context": os.path.join(
+            project_root, "data", "stage", "rag_db_context.json"
+        ),
         # Additional paths can be added here
     }
 

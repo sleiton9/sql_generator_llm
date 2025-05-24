@@ -3,21 +3,86 @@
 # Then you can modify the values to your needs
 
 # General config values
-llm_model: chatgpt # gemini or chatgpt
-sql_motor: pandasql
+llm_model: gemini # gemini, chatgpt
+prompt_method: few_shot # zero_shot, few_shot, rag
+
+# Config for zero_shot and few_shot
+sql_motor:  ansi #pandasql, ansi
 table_name: df
 
 # Config Values Gemini
 gemini_api_key: API_KEY
-gemini_model: gemini-2.0-flash-lite # gemini-2.0-flash  gemini-2.0-flash-lite
+gemini_model: gemini-2.0-flash # gemini-2.0-flash,  gemini-2.0-flash-lite
+gemini_embedding_model: gemini-embedding-exp-03-07  #gemini-embedding-exp-03-07
+threshold_similarity_rag: 0.59
 
 # Config Values ChatGPT
 chatgpt_api_key: API_KEY
-chatgpt_model: gpt-3.5-turbo # gpt-4  gpt-3.5-turbo-16k  gpt-3.5-turbo
+chatgpt_model: gpt-3.5-turbo # gpt-4, gpt-3.5-turbo
 
-#Hyperparameters
-default_context: Eres un generador experto de consultas SQL y estas dentro de una aplicacion de python".
-temperature: 0.5
-max_output_tokens: 1024
-top_p: 0.5
-top_k: 40
+# Hyperparameters
+default_context: Eres un generador experto de consultas SQL y estas dentro de una aplicacion de python, por lo que solo necesitare como salida un objeto JSON con las llaves indicadas despues.
+temperature: 0.1
+max_output_tokens: 512
+top_p: 0.2
+# Testing
+tipo_prompt: malo # bueno, malo
+
+# Prompt values
+prompt_general_instructions: |
+    ### INSTRUCCIONES ###
+    # Este es un prompt donde se definen las instrucciones a seguir, despues de este se enviaran las preguntas del usuario.
+    # El usuario te hará una pregunta en lenguaje natural y tu salida debe ser EXCLUSIVAMENTE un objeto JSON con dos claves:
+    #    1) "sql_statement": que contenga la sentencia SQL optimizada necesaria (sin explicaciones internas).
+    #    2) "explanation": que describa en lenguaje natural cómo interpretar o usar el resultado, agregando las columnas de la fuente y las agregaciones usadas de la consulta (sin mencionar directamente que se genera un SQL internamente para generar el resultado).
+    #        Si la pregunta NO está relacionada con la tabla o los datos, entonces:
+    #            - "sql_statement": null
+    #            - "explanation": "La pregunta no está relacionada con los datos."
+
+prompt_zero_shot: |
+    {instrucciones}
+
+    ### CONTEXTO ###
+    # El motor SQL será: {sql_motor}
+    # El nombre de la tabla es: {table_name}
+    # Este es el contexto de la tabla en la cual se debe basar la consulta: 
+    # {context}
+
+    ## RESPUESTA ###
+    # Por favor, razona paso a paso cómo traducir la pregunta a SQL. Sin embargo, devuelve EXCLUSIVAMENTE el JSON en un bloque de código delimitado por triple backticks ``` con las dos llaves indicadas.
+    # Generar un solo SQL a la vez, no generar varios SQLs. Si se requiere generar varios SQLs dejar null la llave de sql_statement y generar la explicacion de que no se puede generar varias consultas al tiempo.
+    # Para este primer prompt solo responder con una confirmacion de que entendiste las instrucciones y el contexto, sin hacer nada más.
+
+
+prompt_few_shot: |
+    {instrucciones}
+
+    ### CONTEXTO ###
+    # El motor SQL será: {sql_motor}
+    # El nombre de la tabla es: {table_name}
+    # Este es el contexto de la tabla en la cual se debe basar la consulta: 
+    # {context}
+
+    ## EJEMPLOS ###
+    # Para esta pregunta ¿Cuál fue la cantidad total vendida por sector del producto en 2024 en la ciudad Bogota? El resultado esperado es: SELECT DES_SECTOR, SUM(VENTA_VOLUMEN) FROM df WHERE ANIO= 2024 AND DES_CIUDAD= 'Bogota' GROUP BY DES_SECTOR;
+    # Para esta pregunta ¿Cuántas ventas se realizaron en el año 2023? El resultado esperado es: SELECT COUNT(*) FROM df WHERE ANIO= 2023;
+    # Para esta pregunta ¿Cuál es el precio promedio de venta por línea y tipo de fabricante en el ultimo año? El resultado esperado es: SELECT DES_LINEA, DES_TIPO_FABRICANTE, AVG(VENTA_PRECIO) FROM df WHERE ANIO= 2024 GROUP BY DES_LINEA, DES_TIPO_FABRICANTE;
+
+    ## RESPUESTA ###
+    # Por favor, razona paso a paso cómo traducir la pregunta a SQL. Sin embargo, devuelve EXCLUSIVAMENTE el JSON en un bloque de código delimitado por triple backticks ``` con las dos llaves indicadas.
+    # Generar un solo SQL a la vez, no generar varios SQLs. Si se requiere generar varios SQLs dejar null la llave de sql_statement y generar la explicacion de que no se puede generar varias consultas al tiempo.
+    # Para este primer prompt solo responder con una confirmacion de que entendiste las instrucciones y el contexto, sin hacer nada más.
+
+
+
+prompt_rag: |
+    {instrucciones}
+
+    ### CONTEXTO ###
+    # Va a ser una aplicacion con un RAG que va a generar un contexto por cada pregunta, por lo que el contexto del query se enviara en los siguientes prompts como una lista de diccionarios.
+
+    ## RESPUESTA ###
+    # Si el contexto no es suficiente, generar las llaves como se indico en las instrucciones, no generar columnas que no estan en el contexto
+    # Por favor, razona paso a paso cómo traducir la pregunta a SQL. Sin embargo, devuelve EXCLUSIVAMENTE el JSON en un bloque de código delimitado por triple backticks ``` con las dos llaves indicadas.
+    # Generar un solo SQL a la vez, no generar varios SQLs. Si se requiere generar varios SQLs dejar null la llave de sql_statement y generar la explicacion de que no se puede generar varias consultas al tiempo.
+    # Para este primer prompt solo responder con una confirmacion de que entendiste las instrucciones y el contexto, sin hacer nada más.

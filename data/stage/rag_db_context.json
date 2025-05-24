@@ -1,0 +1,215 @@
+{
+    "Bases_de_datos": [
+      {
+        "Nombre_base_de_datos": "default_db",
+        "Tipo_base_de_datos": "ansi",
+        "Tablas": [
+          {
+            "Nombre_tabla": "df",
+            "Columnas": [
+              {
+                "Nombre_del_campo": "COD_CLIENTE",
+                "Tipo_campo": "object",
+                "Definicion": "Codigo identificador del establecimiento",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_CLIENTE",
+                "Tipo_campo": "object",
+                "Definicion": "descripcion del establecimiento",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_CIUDAD",
+                "Tipo_campo": "object",
+                "Definicion": "Ciudad en donde se encuentra ubicado el establecimiento",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_TIPOCLIENTE",
+                "Tipo_campo": "object",
+                "Definicion": "Tipo de establecimiento",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "COD_TICKET",
+                "Tipo_campo": "object",
+                "Definicion": "Codigo de la transaccion",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "ANIO",
+                "Tipo_campo": "int64",
+                "Definicion": "Año en que se ejecuto la transaccion",
+                "Ejemplos": "2024",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "MES",
+                "Tipo_campo": "int64",
+                "Definicion": "Mes en que se ejecuto la transaccion",
+                "Ejemplos": "1;2;3;4;5;6;7;8;9;10;11;12;enero;febrero;marzo;abril;mayo;junio;julio;agosto;septiembre;octubre;noviembre;diciembre",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "FECHA",
+                "Tipo_campo": "object",
+                "Definicion": "Fecha en que se ejecuto la transaccion",
+                "Ejemplos": "2024-09-01;2025-03-30",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "FECHA_EXACTA",
+                "Tipo_campo": "object",
+                "Definicion": "Fecha exacta en que se ejecuto la transaccion",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "HORA",
+                "Tipo_campo": "int64",
+                "Definicion": "Hora en que se ejecuto la transaccion",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "COD_MATERIALEAN",
+                "Tipo_campo": "object",
+                "Definicion": "Codigo del material que se vendio detro de la transaccion",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_MATERIAL",
+                "Tipo_campo": "object",
+                "Definicion": "Descipcion del material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_CANASTA",
+                "Tipo_campo": "object",
+                "Definicion": "Canasta de productos a la que pertenece el material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_TIPOCANASTA",
+                "Tipo_campo": "object",
+                "Definicion": "Tipologia de la canasta a la que pertenece el material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_SECTOR",
+                "Tipo_campo": "object",
+                "Definicion": "Sector de productos al que pertenece el material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_CATEGORIA",
+                "Tipo_campo": "object",
+                "Definicion": "Categoria de productos a la que pertenece el material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_SUBCATEGORIA",
+                "Tipo_campo": "object",
+                "Definicion": "Subcategoria de productos a la que pertenece el material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_LINEA",
+                "Tipo_campo": "object",
+                "Definicion": "Linea de productos a la que pertenece el material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_MARCA",
+                "Tipo_campo": "object",
+                "Definicion": "Marca del material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_SUBMARCA",
+                "Tipo_campo": "object",
+                "Definicion": "Submarca del material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_FABRICANTE",
+                "Tipo_campo": "object",
+                "Definicion": "Fabricante que produce el material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_TIPOFABRICANTE",
+                "Tipo_campo": "object",
+                "Definicion": "Tipo de fabricante (Nutresa o no Nutresa)",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "LONGITUD_METROS",
+                "Tipo_campo": "float64",
+                "Definicion": "Longitud en metros del material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "PESO",
+                "Tipo_campo": "float64",
+                "Definicion": "Peso del material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "DES_UNIDADMEDIDA",
+                "Tipo_campo": "object",
+                "Definicion": "Unidad de medida del peso del material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "PRECIO_VENTA",
+                "Tipo_campo": "float64",
+                "Definicion": "Precio de venta del material",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "VENTA_VALOR",
+                "Tipo_campo": "float64",
+                "Definicion": "Ventas en valor del material en la transaccion",
+                "Relaciones": null,
+                "Restricciones": null
+              },
+              {
+                "Nombre_del_campo": "VENTA_VOLUMEN",
+                "Tipo_campo": "float64",
+                "Definicion": "Venta en volumen (unidades de producto) del material en la transaccion",
+                "Relaciones": null,
+                "Restricciones": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

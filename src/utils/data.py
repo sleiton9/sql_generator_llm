@@ -2,6 +2,7 @@
 import pandas as pd
 import pandasql as ps
 import logging
+import json
 
 # Configure logger for this module
 logger = logging.getLogger(__name__)
@@ -17,6 +18,7 @@ def read_data_and_definition(path: str, path_definition: str) -> pd.DataFrame:
 
     Returns:
         pd.DataFrame: The data read from the CSV file.
+        str: A markdown table containing the data field definitions.
     """
     logger.debug("Attempting to read data from CSV file at path: " + path)
     try:
@@ -70,7 +72,7 @@ def query_data(df: pd.DataFrame, query: str) -> pd.DataFrame:
 
 def get_data_definition(path: str) -> str:
     """
-    Read data from a CSV file containing data field definitions and return a DataFrame.
+    Read data from a CSV file containing data field definitions and return a markdown table.
 
     Args:
         path (str): The file path to the CSV data field definitions.
@@ -87,3 +89,28 @@ def get_data_definition(path: str) -> str:
     except Exception as e:
         logger.error(f"Error reading data field definitions from {path}: {e}")
         raise
+
+def read_json(path: str) -> dict | None:
+    """
+    Reads and parses a JSON file.
+
+    Args:
+        path: The path to the JSON file.
+
+    Returns:
+        A dictionary with the parsed JSON data, or None if an error occurs.
+    """
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            logger.info(f"JSON file read successfully from {path}")
+        return data
+    except FileNotFoundError:
+        logger.error(f"Error: JSON file not found at path: {path}")
+        return None
+    except json.JSONDecodeError:
+        logger.error(f"Error: JSON file at {path} is not valid JSON.")
+        return None
+    except Exception as e:
+        logger.error(f"Unexpected error reading JSON file: {e}")
+        return None
