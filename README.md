@@ -7,7 +7,7 @@ También, en los siguientes enlaces se encuentra la información documental asoc
 
 [Informe Proyecto](**Se debe habilitar enlace en donde tenga la información**)
 
-[Manual de Usuario](**Se debe habilitar enlace en donde tenga la información**)
+[Manual de Usuario](/Manual_Usuario.md)
 
 [Video Demo](**Se debe habilitar enlace en donde está el demo establecido**)
 
