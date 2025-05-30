@@ -64,7 +64,7 @@ prompt_few_shot: |
     # {context}
 
     ## EJEMPLOS ###
-    # Para esta pregunta ¿Cuál fue la cantidad total vendida por sector del producto en 2024 en la ciudad Bogota? El resultado esperado es: SELECT DES_SECTOR, SUM(VENTA_VOLUMEN) FROM df WHERE ANIO= 2024 AND DES_CIUDAD= 'Bogota' GROUP BY DES_SECTOR;
+    # Para esta pregunta ¿cual es la marca con el mayor precio promedio por unidad? El resultado esperado es: SELECT DES_MARCA, SUM(VENTA_VALOR) / SUM(VENTA_VOLUMEN) FROM df GROUP BY DES_MARCA ORDER BY SUM(VENTA_VALOR) / SUM(VENTA_VOLUMEN) DESC LIMIT 1; No tomar la columna de PRECIO_VENTA
     # Para esta pregunta ¿Cuántas ventas se realizaron en el año 2023? El resultado esperado es: SELECT COUNT(*) FROM df WHERE ANIO= 2023;
     # Para esta pregunta ¿Cuál es el precio promedio de venta por línea y tipo de fabricante en el ultimo año? El resultado esperado es: SELECT DES_LINEA, DES_TIPO_FABRICANTE, AVG(VENTA_PRECIO) FROM df WHERE ANIO= 2024 GROUP BY DES_LINEA, DES_TIPO_FABRICANTE;
 

@@ -2,7 +2,7 @@ import logging
 from logs.config_logging import setup_logging
 from config.config_yaml_loader import load_config
 from utils.models import send_prompt, get_sql_and_explanation, generate_initial_prompt, generate_question_prompt, initialize_gemini_rag, get_relevant_context_gemini
-from utils.data import read_data_and_definition, query_data
+from utils.data import read_data_and_definition, query_data, save_query_result, ask_user_to_save
 
 # Setup the logs
 setup_logging()
@@ -62,15 +62,33 @@ def main() -> None:
             if sql_statement is None:
                 print("La pregunta no está relacionada con los datos o no se pudo generar una consulta.")
                 print("Explicación: ", explanation)
+                
+                # Preguntar si quiere guardar incluso sin SQL
+                want_to_save = ask_user_to_save()
+                if want_to_save:
+                    save_query_result(user_question, sql_statement, explanation)
+                
             else:
                 try:
                     df_result = query_data(df, sql_statement)
                     print("Explicación:", explanation)
                     print("Resultado de la pregunta:")
                     print(df_result)
+                    
+                    # Preguntar si quiere guardar el resultado exitoso
+                    want_to_save = ask_user_to_save()
+                    if want_to_save:
+                        save_query_result(user_question, sql_statement, explanation, df_result)
+                    
                 except Exception as e:
                     print("Error al ejecutar la consulta SQL:", e)
                     print("Explicación:", explanation)
+                    
+                    # Preguntar si quiere guardar el resultado con error
+                    want_to_save = ask_user_to_save()
+                    if want_to_save:
+                        error_result = f"Error SQL: {str(e)}"
+                        save_query_result(user_question, sql_statement, explanation, error_result)
 
         
     except Exception as e:
